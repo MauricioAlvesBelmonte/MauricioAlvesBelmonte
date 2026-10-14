@@ -98,9 +98,10 @@ def lines(stats):
     ]
 
 
+# Paleta do portfolio (mauriciobelmonte.dev.br)
 THEMES = {
-    "dark": dict(bg="#161b22", text="#c9d1d9", key="#ffa657", value="#a5d6ff", cc="#616e7f", border="#30363d", prompt="#3fb950"),
-    "light": dict(bg="#f6f8fa", text="#24292f", key="#953800", value="#0a3069", cc="#8b949e", border="#d0d7de", prompt="#1a7f37"),
+    "dark": dict(bg="#1c1c1c", text="#ececec", key="#6ea8ff", value="#ececec", cc="#5d5d5d", border="#2b2b2b", prompt="#6ea8ff", muted="#9b9b9b"),
+    "light": dict(bg="#ffffff", text="#171717", key="#2e6bff", value="#171717", cc="#a3a19b", border="#e0ded7", prompt="#2e6bff", muted="#66645f"),
 }
 
 
@@ -120,7 +121,7 @@ text,tspan{{white-space:pre}}
 .cur{{animation:bl 1s steps(1) infinite}}@keyframes bl{{50%{{opacity:0}}}}
 @media (prefers-reduced-motion:reduce){{.logo{{animation:none}}.logo:first-of-type{{opacity:1}}}}
 </style>""",
-        f'<rect width="985" height="550" fill="{P["bg"]}" rx="15"/>',
+        f'<rect x="0.5" y="0.5" width="984" height="549" fill="{P["bg"]}" stroke="{P["border"]}" rx="15"/>',
     ]
     lx, ly = 22, 50
     for i, logo in enumerate(logos):
@@ -140,7 +141,7 @@ text,tspan{{white-space:pre}}
     fy = iy + len(info) * lh + 28
     out.append(f'<line x1="{ix}" x2="{ix + WIDTH * cw}" y1="{fy - 20}" y2="{fy - 20}" stroke="{P["border"]}"/>')
     out.append(f'<text x="{ix}" y="{fy}"><tspan class="pr">❯</tspan><tspan class="text"> git commit -m </tspan>'
-               f'<tspan class="value">"funciona (não sei bem por quê)"</tspan><tspan class="text cur">█</tspan></text>')
+               f'<tspan fill="{P['muted']}">"funciona (não sei bem por quê)"</tspan><tspan class="text cur">█</tspan></text>')
     out.append("</svg>")
     return "\n".join(out) + "\n"
 
