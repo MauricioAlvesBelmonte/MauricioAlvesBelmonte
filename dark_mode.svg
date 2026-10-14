@@ -75,7 +75,7 @@ text,tspan{white-space:pre}
 <tspan x="410" y="390"></tspan>
 <tspan x="410" y="410"><tspan class="text">GitHub Stats </tspan><tspan class="cc">---------------------------------------------</tspan></tspan>
 <tspan x="410" y="430"><tspan class="key">Repos</tspan><tspan class="cc">: ................................................. </tspan><tspan class="value">8</tspan></tspan>
-<tspan x="410" y="450"><tspan class="key">Contributions (1y)</tspan><tspan class="cc">: ................................ </tspan><tspan class="value">1,445</tspan></tspan>
+<tspan x="410" y="450"><tspan class="key">Contributions (1y)</tspan><tspan class="cc">: ................................ </tspan><tspan class="value">1,442</tspan></tspan>
 </text>
 <line x1="410" x2="932.0" y1="478" y2="478" stroke="#30363d"/>
 <text x="410" y="498"><tspan class="pr">❯</tspan><tspan class="text"> git commit -m </tspan><tspan class="value">"funciona (não sei bem por quê)"</tspan><tspan class="text cur">█</tspan></text>
