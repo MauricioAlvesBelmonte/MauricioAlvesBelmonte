@@ -14,7 +14,8 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 USER = "MauricioAlvesBelmonte"
 CAREER_START = datetime.date(2020, 6, 24)
-WIDTH = 58  # largura, em caracteres, de cada linha do card
+WIDTH = 60  # largura, em caracteres, de cada linha do card
+MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"]
 
 
 def uptime(start=CAREER_START):
@@ -26,7 +27,7 @@ def uptime(start=CAREER_START):
     if m < 0:
         y -= 1
         m += 12
-    return f"{y} anos, {m} meses, {d} dias"
+    return f"{y}y {m}m {d}d"
 
 
 def graphql(token, query):
@@ -62,46 +63,47 @@ def fetch_stats():
     return stats
 
 
-def kv(k, v):
-    dots = WIDTH - len(k) - len(v) - 3
-    return [("key", k), ("cc", ": " + "." * dots + " "), ("value", v)]
-
-
-def sec(t):
-    return [("text", t + " "), ("cc", "-" * (WIDTH - len(t) - 1))]
+def st(k, *parts):
+    """Campo do `systemctl status`: chave alinhada à direita em 11 colunas."""
+    return [("key", f"{k:>11}"), ("cc", ": ")] + [p if isinstance(p, tuple) else ("value", p) for p in parts]
 
 
 def lines(stats):
+    pid = stats["contributions"]
+    t = datetime.date.today()
+    day = f"{MESES[t.month - 1]} {t.day:02d}"
+
+    def log(hora, msg, cls="value"):
+        return [("cc", f"{day} {hora} "), ("key", f"dev[{pid}]"), ("cc", ": "), (cls, msg)]
+
     return [
-        [("text", "mauricio"), ("cc", "@"), ("text", "belmonte "), ("cc", "-" * (WIDTH - 18))],
-        kv("OS", "Fedora Linux 44, Windows 11"),
-        kv("Uptime", uptime()),
-        kv("Host", "SIGE Cloud, BM Menu"),
-        kv("Kernel", "Dev C#/.NET · ERP e integrações"),
-        kv("IDE", "VS Code, Claude Code, OpenCode"),
-        kv("Locale", "Rio Grande do Sul, BR"),
+        [("ok", "● "), ("text", "mauricio.service"), ("cc", " - "), ("value", "Dev C#/.NET · ERP e integrações")],
+        st("Loaded", "loaded (/rs/belmonte.service; ", ("ok", "enabled"), ")"),
+        st("Active", ("ok", "active (running)"), f" since {CAREER_START}; ", ("cc", uptime())),
+        st("Docs", "https://mauriciobelmonte.dev.br"),
+        st("Main PID", f"{pid} ", ("cc", "(contributions, 1y)")),
+        st("Tasks", f"{stats['repos']} ", ("cc", "(repos)")),
+        st("Memory", "C#, Python, TypeScript"),
+        st("CPU", "ASP.NET, Angular, React, Svelte, FastAPI"),
+        st("CGroup", ("cc", "/work.slice/mauricio.service")),
+        [("cc", " " * 13 + "├─ "), ("value", "SIGE Cloud")],
+        [("cc", " " * 13 + "└─ "), ("value", "BM Menu")],
         [],
-        kv("Languages.Programming", "C#, Python, TypeScript"),
-        kv("Frameworks", "ASP.NET, Angular, React, Svelte, FastAPI"),
-        kv("Databases", "MongoDB, PostgreSQL, SQLite"),
-        kv("DevOps.AI", "Docker, Actions, Claude, Ollama"),
-        kv("Languages.Real", "Português"),
-        [],
-        sec("Contact"),
-        kv("Email", "mauricioabelmonte@gmail.com"),
-        kv("LinkedIn", "mauricioabelmonte-dev"),
-        kv("Web", "mauriciobelmonte.dev.br"),
-        [],
-        sec("GitHub Stats"),
-        kv("Repos", str(stats["repos"])),
-        kv("Contributions (1y)", f"{stats['contributions']:,}"),
+        log("09:02", "db: MongoDB, PostgreSQL, SQLite"),
+        log("09:03", "ops: Docker, Actions, Claude, Ollama"),
+        log("09:03", "os: Fedora Linux 44, Windows 11"),
+        log("09:04", "ide: VS Code, Claude Code, OpenCode"),
+        log("09:04", "locale: Rio Grande do Sul, BR"),
+        log("09:05", "mail: mauricioabelmonte@gmail.com"),
+        log("09:05", "linkedin: in/mauricioabelmonte-dev"),
+        log("18:47", "warn: funciona (não sei bem por quê)", "warn"),
     ]
 
 
 # Paleta do portfolio (mauriciobelmonte.dev.br)
 THEMES = {
-    "dark": dict(bg="#1c1c1c", text="#ececec", key="#6ea8ff", value="#ececec", cc="#5d5d5d", border="#2b2b2b", prompt="#6ea8ff", muted="#9b9b9b"),
-    "light": dict(bg="#ffffff", text="#171717", key="#2e6bff", value="#171717", cc="#a3a19b", border="#e0ded7", prompt="#2e6bff", muted="#66645f"),
+    "dark": dict(bg="#1c1c1c", text="#ececec", key="#6ea8ff", value="#ececec", cc="#6e6e6e", border="#2b2b2b", prompt="#6ea8ff", muted="#9b9b9b", ok="#7ec27e", warn="#e5c07b"),
+    "light": dict(bg="#ffffff", text="#171717", key="#2e6bff", value="#171717", cc="#8f8d87", border="#e0ded7", prompt="#2e6bff", muted="#66645f", ok="#2f8a3a", warn="#a86b00"),
 }
 
 
@@ -114,7 +116,7 @@ def svg(theme, logos, info):
         f'<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,\'DejaVu Sans Mono\',monospace" width="985" height="550" font-size="{fs}px">',
         f"""<style>
 @font-face{{src:local('Consolas'),local('Consolas Bold');font-family:'ConsolasFallback';font-display:swap;-webkit-size-adjust:109%;size-adjust:109%}}
-.key{{fill:{P['key']}}}.value{{fill:{P['value']}}}.cc{{fill:{P['cc']}}}.text{{fill:{P['text']}}}.pr{{fill:{P['prompt']}}}
+.key{{fill:{P['key']}}}.value{{fill:{P['value']}}}.cc{{fill:{P['cc']}}}.text{{fill:{P['text']}}}.pr{{fill:{P['prompt']}}}.ok{{fill:{P['ok']}}}.warn{{fill:{P['warn']}}}
 text,tspan{{white-space:pre}}
 .logo{{opacity:0;animation:cyc {total}s infinite}}
 @keyframes cyc{{0%{{opacity:0}}{on * 0.08:.2f}%{{opacity:1}}{on * 0.9:.2f}%{{opacity:1}}{on:.2f}%{{opacity:0}}100%{{opacity:0}}}}
@@ -132,16 +134,17 @@ text,tspan{{white-space:pre}}
         out.append(f'<text x="{lx}" y="{ly + 20 * lh + 22}"><tspan class="pr">~/daily</tspan><tspan class="cc"> $ </tspan>'
                    f'<tspan class="text">using </tspan><tspan fill="{col}">{html.escape(logo["label"])}</tspan></text>')
         out.append("</g>")
-    ix, iy = 410, 30
+    ix, iy = 400, 30
+    out.append(f'<text x="{ix}" y="{iy}"><tspan class="pr">❯</tspan><tspan class="text"> systemctl status mauricio</tspan></text>')
+    iy += lh
     out.append(f'<text x="{ix}" y="{iy}" class="text">')
     for j, line in enumerate(info):
         out.append(f'<tspan x="{ix}" y="{iy + j * lh}">' + "".join(
             f'<tspan class="{c}">{html.escape(s)}</tspan>' for c, s in line) + "</tspan>")
     out.append("</text>")
-    fy = iy + len(info) * lh + 28
+    fy = ly + 20 * lh + 22
     out.append(f'<line x1="{ix}" x2="{ix + WIDTH * cw}" y1="{fy - 20}" y2="{fy - 20}" stroke="{P["border"]}"/>')
-    out.append(f'<text x="{ix}" y="{fy}"><tspan class="pr">❯</tspan><tspan class="text"> git commit -m </tspan>'
-               f'<tspan fill="{P['muted']}">"funciona (não sei bem por quê)"</tspan><tspan class="text cur">█</tspan></text>')
+    out.append(f'<text x="{ix}" y="{fy}"><tspan class="pr">❯</tspan><tspan class="text"> </tspan><tspan class="text cur">█</tspan></text>')
     out.append("</svg>")
     return "\n".join(out) + "\n"
 

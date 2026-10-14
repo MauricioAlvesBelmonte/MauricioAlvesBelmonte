@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,'DejaVu Sans Mono',monospace" width="985" height="550" font-size="15px">
 <style>
 @font-face{src:local('Consolas'),local('Consolas Bold');font-family:'ConsolasFallback';font-display:swap;-webkit-size-adjust:109%;size-adjust:109%}
-.key{fill:#6ea8ff}.value{fill:#ececec}.cc{fill:#5d5d5d}.text{fill:#ececec}.pr{fill:#6ea8ff}
+.key{fill:#6ea8ff}.value{fill:#ececec}.cc{fill:#6e6e6e}.text{fill:#ececec}.pr{fill:#6ea8ff}.ok{fill:#7ec27e}.warn{fill:#e5c07b}
 text,tspan{white-space:pre}
 .logo{opacity:0;animation:cyc 28.6s infinite}
 @keyframes cyc{0%{opacity:0}0.73%{opacity:1}8.18%{opacity:1}9.09%{opacity:0}100%{opacity:0}}
@@ -53,30 +53,29 @@ text,tspan{white-space:pre}
 <text x="22" y="50" fill="currentColor"><tspan x="22" y="50">        -gggg_            _gggg-</tspan><tspan x="22" y="70">       _@@#M#@g          g#@M@#B_</tspan><tspan x="22" y="90">       @@#M B#@_ ______ q#@B M@#E</tspan><tspan x="22" y="110">       B#@  M@#@#@#@#@#@#@#M -#@B</tspan><tspan x="22" y="130">       B@#__g#@#MT-  -7M@#@g__@#B</tspan><tspan x="22" y="150">      _@#@#@#@R-        -N#@#@#@@_</tspan><tspan x="22" y="170">    _@@#M^-                  -7M@#g_</tspan><tspan x="22" y="190">   -@@#%                        ?@#B</tspan><tspan x="22" y="210">   @@#E   _gg_ __gggggg_- _gg_   @@#K</tspan><tspan x="22" y="230">   M#@g  -#@#Kg@BMTTTTM@#g4@#@   @#@~</tspan><tspan x="22" y="250">    M#@g_ -&#x27;-@@F  ##@K  M#E-&#x27;- _@#@R</tspan><tspan x="22" y="270">    g@#B^    N#g_  MR  _@@R    ^B@#_</tspan><tspan x="22" y="290">    @#@-      7B@#@@@@@##F      -#@B</tspan><tspan x="22" y="310">   ~#@E          ------          @#@-</tspan><tspan x="22" y="330">    @#@-                        _#@#</tspan><tspan x="22" y="350">    M@#g_                      _@@#R</tspan><tspan x="22" y="370">    _#@#%                      ?@#B-</tspan><tspan x="22" y="390">    @@#R                        M@#L</tspan><tspan x="22" y="410">    @#@-                        -#@E</tspan><tspan x="22" y="430">    fMMK                        MMMF</tspan></text>
 <text x="22" y="472"><tspan class="pr">~/daily</tspan><tspan class="cc"> $ </tspan><tspan class="text">using </tspan><tspan fill="currentColor">Ollama</tspan></text>
 </g>
-<text x="410" y="30" class="text">
-<tspan x="410" y="30"><tspan class="text">mauricio</tspan><tspan class="cc">@</tspan><tspan class="text">belmonte </tspan><tspan class="cc">----------------------------------------</tspan></tspan>
-<tspan x="410" y="50"><tspan class="key">OS</tspan><tspan class="cc">: .......................... </tspan><tspan class="value">Fedora Linux 44, Windows 11</tspan></tspan>
-<tspan x="410" y="70"><tspan class="key">Uptime</tspan><tspan class="cc">: ......................... </tspan><tspan class="value">6 anos, 3 meses, 20 dias</tspan></tspan>
-<tspan x="410" y="90"><tspan class="key">Host</tspan><tspan class="cc">: ................................ </tspan><tspan class="value">SIGE Cloud, BM Menu</tspan></tspan>
-<tspan x="410" y="110"><tspan class="key">Kernel</tspan><tspan class="cc">: .................. </tspan><tspan class="value">Dev C#/.NET · ERP e integrações</tspan></tspan>
-<tspan x="410" y="130"><tspan class="key">IDE</tspan><tspan class="cc">: ...................... </tspan><tspan class="value">VS Code, Claude Code, OpenCode</tspan></tspan>
-<tspan x="410" y="150"><tspan class="key">Locale</tspan><tspan class="cc">: ............................ </tspan><tspan class="value">Rio Grande do Sul, BR</tspan></tspan>
-<tspan x="410" y="170"></tspan>
-<tspan x="410" y="190"><tspan class="key">Languages.Programming</tspan><tspan class="cc">: ............ </tspan><tspan class="value">C#, Python, TypeScript</tspan></tspan>
-<tspan x="410" y="210"><tspan class="key">Frameworks</tspan><tspan class="cc">: ..... </tspan><tspan class="value">ASP.NET, Angular, React, Svelte, FastAPI</tspan></tspan>
-<tspan x="410" y="230"><tspan class="key">Databases</tspan><tspan class="cc">: ................... </tspan><tspan class="value">MongoDB, PostgreSQL, SQLite</tspan></tspan>
-<tspan x="410" y="250"><tspan class="key">DevOps.AI</tspan><tspan class="cc">: ............... </tspan><tspan class="value">Docker, Actions, Claude, Ollama</tspan></tspan>
-<tspan x="410" y="270"><tspan class="key">Languages.Real</tspan><tspan class="cc">: ................................ </tspan><tspan class="value">Português</tspan></tspan>
-<tspan x="410" y="290"></tspan>
-<tspan x="410" y="310"><tspan class="text">Contact </tspan><tspan class="cc">--------------------------------------------------</tspan></tspan>
-<tspan x="410" y="330"><tspan class="key">Email</tspan><tspan class="cc">: ....................... </tspan><tspan class="value">mauricioabelmonte@gmail.com</tspan></tspan>
-<tspan x="410" y="350"><tspan class="key">LinkedIn</tspan><tspan class="cc">: .......................... </tspan><tspan class="value">mauricioabelmonte-dev</tspan></tspan>
-<tspan x="410" y="370"><tspan class="key">Web</tspan><tspan class="cc">: ............................. </tspan><tspan class="value">mauriciobelmonte.dev.br</tspan></tspan>
-<tspan x="410" y="390"></tspan>
-<tspan x="410" y="410"><tspan class="text">GitHub Stats </tspan><tspan class="cc">---------------------------------------------</tspan></tspan>
-<tspan x="410" y="430"><tspan class="key">Repos</tspan><tspan class="cc">: ................................................. </tspan><tspan class="value">8</tspan></tspan>
-<tspan x="410" y="450"><tspan class="key">Contributions (1y)</tspan><tspan class="cc">: ................................ </tspan><tspan class="value">1,444</tspan></tspan>
+<text x="400" y="30"><tspan class="pr">❯</tspan><tspan class="text"> systemctl status mauricio</tspan></text>
+<text x="400" y="50" class="text">
+<tspan x="400" y="50"><tspan class="ok">● </tspan><tspan class="text">mauricio.service</tspan><tspan class="cc"> - </tspan><tspan class="value">Dev C#/.NET · ERP e integrações</tspan></tspan>
+<tspan x="400" y="70"><tspan class="key">     Loaded</tspan><tspan class="cc">: </tspan><tspan class="value">loaded (/rs/belmonte.service; </tspan><tspan class="ok">enabled</tspan><tspan class="value">)</tspan></tspan>
+<tspan x="400" y="90"><tspan class="key">     Active</tspan><tspan class="cc">: </tspan><tspan class="ok">active (running)</tspan><tspan class="value"> since 2020-06-24; </tspan><tspan class="cc">6y 3m 20d</tspan></tspan>
+<tspan x="400" y="110"><tspan class="key">       Docs</tspan><tspan class="cc">: </tspan><tspan class="value">https://mauriciobelmonte.dev.br</tspan></tspan>
+<tspan x="400" y="130"><tspan class="key">   Main PID</tspan><tspan class="cc">: </tspan><tspan class="value">1444 </tspan><tspan class="cc">(contributions, 1y)</tspan></tspan>
+<tspan x="400" y="150"><tspan class="key">      Tasks</tspan><tspan class="cc">: </tspan><tspan class="value">8 </tspan><tspan class="cc">(repos)</tspan></tspan>
+<tspan x="400" y="170"><tspan class="key">     Memory</tspan><tspan class="cc">: </tspan><tspan class="value">C#, Python, TypeScript</tspan></tspan>
+<tspan x="400" y="190"><tspan class="key">        CPU</tspan><tspan class="cc">: </tspan><tspan class="value">ASP.NET, Angular, React, Svelte, FastAPI</tspan></tspan>
+<tspan x="400" y="210"><tspan class="key">     CGroup</tspan><tspan class="cc">: </tspan><tspan class="cc">/work.slice/mauricio.service</tspan></tspan>
+<tspan x="400" y="230"><tspan class="cc">             ├─ </tspan><tspan class="value">SIGE Cloud</tspan></tspan>
+<tspan x="400" y="250"><tspan class="cc">             └─ </tspan><tspan class="value">BM Menu</tspan></tspan>
+<tspan x="400" y="270"></tspan>
+<tspan x="400" y="290"><tspan class="cc">out 14 09:02 </tspan><tspan class="key">dev[1444]</tspan><tspan class="cc">: </tspan><tspan class="value">db: MongoDB, PostgreSQL, SQLite</tspan></tspan>
+<tspan x="400" y="310"><tspan class="cc">out 14 09:03 </tspan><tspan class="key">dev[1444]</tspan><tspan class="cc">: </tspan><tspan class="value">ops: Docker, Actions, Claude, Ollama</tspan></tspan>
+<tspan x="400" y="330"><tspan class="cc">out 14 09:03 </tspan><tspan class="key">dev[1444]</tspan><tspan class="cc">: </tspan><tspan class="value">os: Fedora Linux 44, Windows 11</tspan></tspan>
+<tspan x="400" y="350"><tspan class="cc">out 14 09:04 </tspan><tspan class="key">dev[1444]</tspan><tspan class="cc">: </tspan><tspan class="value">ide: VS Code, Claude Code, OpenCode</tspan></tspan>
+<tspan x="400" y="370"><tspan class="cc">out 14 09:04 </tspan><tspan class="key">dev[1444]</tspan><tspan class="cc">: </tspan><tspan class="value">locale: Rio Grande do Sul, BR</tspan></tspan>
+<tspan x="400" y="390"><tspan class="cc">out 14 09:05 </tspan><tspan class="key">dev[1444]</tspan><tspan class="cc">: </tspan><tspan class="value">mail: mauricioabelmonte@gmail.com</tspan></tspan>
+<tspan x="400" y="410"><tspan class="cc">out 14 09:05 </tspan><tspan class="key">dev[1444]</tspan><tspan class="cc">: </tspan><tspan class="value">linkedin: in/mauricioabelmonte-dev</tspan></tspan>
+<tspan x="400" y="430"><tspan class="cc">out 14 18:47 </tspan><tspan class="key">dev[1444]</tspan><tspan class="cc">: </tspan><tspan class="warn">warn: funciona (não sei bem por quê)</tspan></tspan>
 </text>
-<line x1="410" x2="932.0" y1="478" y2="478" stroke="#2b2b2b"/>
-<text x="410" y="498"><tspan class="pr">❯</tspan><tspan class="text"> git commit -m </tspan><tspan fill="#9b9b9b">"funciona (não sei bem por quê)"</tspan><tspan class="text cur">█</tspan></text>
+<line x1="400" x2="940.0" y1="452" y2="452" stroke="#2b2b2b"/>
+<text x="400" y="472"><tspan class="pr">❯</tspan><tspan class="text"> </tspan><tspan class="text cur">█</tspan></text>
 </svg>
