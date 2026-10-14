@@ -1,7 +1,7 @@
 """Gera dark_mode.svg e light_mode.svg do README de perfil.
 
 Uso: python profile.py
-Lê ACCESS_TOKEN (ou GITHUB_TOKEN) do ambiente para atualizar os stats do GitHub.
+Lê ACCESS_TOKEN e GITHUB_TOKEN do ambiente para atualizar os stats do GitHub.
 Sem token, ou se a API falhar, mantém os últimos valores salvos em stats.json.
 """
 import datetime
@@ -29,31 +29,33 @@ def uptime(start=CAREER_START):
     return f"{y} anos, {m} meses, {d} dias"
 
 
-def fetch_stats():
-    cache = ROOT / "stats.json"
-    stats = json.loads(cache.read_text()) if cache.exists() else {"repos": 0, "contributed": 0, "contributions": 0}
-    token = os.environ.get("ACCESS_TOKEN") or os.environ.get("GITHUB_TOKEN")
-    if not token:
-        return stats
-    query = """query($login:String!){ user(login:$login){
-      repositories(ownerAffiliations:OWNER){totalCount}
-      repositoriesContributedTo(contributionTypes:[COMMIT,PULL_REQUEST,REPOSITORY]){totalCount}
-      contributionsCollection{contributionCalendar{totalContributions}} } }"""
+def graphql(token, query):
     req = urllib.request.Request(
         "https://api.github.com/graphql",
         data=json.dumps({"query": query, "variables": {"login": USER}}).encode(),
         headers={"Authorization": f"bearer {token}", "Content-Type": "application/json"},
     )
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.load(r)["data"]["user"]
+
+
+def fetch_stats():
+    """Repos vêm do ACCESS_TOKEN (enxerga os privados). Contribuições vêm do
+    GITHUB_TOKEN, que vê o mesmo total do perfil público (com as privadas
+    anonimizadas); o token fine-grained do dono conta menos que isso."""
+    cache = ROOT / "stats.json"
+    stats = json.loads(cache.read_text()) if cache.exists() else {"repos": 0, "contributions": 0}
+    access, public = os.environ.get("ACCESS_TOKEN"), os.environ.get("GITHUB_TOKEN")
     try:
-        with urllib.request.urlopen(req, timeout=30) as r:
-            u = json.load(r)["data"]["user"]
-        new = {
-            "repos": u["repositories"]["totalCount"],
-            "contributed": u["repositoriesContributedTo"]["totalCount"],
-            "contributions": u["contributionsCollection"]["contributionCalendar"]["totalContributions"],
-        }
-        # Sem ACCESS_TOKEN, o GITHUB_TOKEN não enxerga os repos privados: não deixa os números regredirem.
-        stats = new if os.environ.get("ACCESS_TOKEN") else {k: max(stats.get(k, 0), v) for k, v in new.items()}
+        if access or public:
+            repos = graphql(access or public, "query($login:String!){user(login:$login){repositories(ownerAffiliations:OWNER){totalCount}}}")
+            n = repos["repositories"]["totalCount"]
+            # Sem ACCESS_TOKEN só os repos públicos aparecem: não deixa o número regredir.
+            stats["repos"] = n if access else max(stats["repos"], n)
+        if public:
+            cal = graphql(public, "query($login:String!){user(login:$login){contributionsCollection{contributionCalendar{totalContributions}}}}")
+            stats["contributions"] = cal["contributionsCollection"]["contributionCalendar"]["totalContributions"]
+        stats = {k: stats[k] for k in ("repos", "contributions")}
         cache.write_text(json.dumps(stats, indent=1) + "\n")
     except Exception as e:
         print(f"stats: mantendo valores anteriores ({e})")
@@ -92,7 +94,6 @@ def lines(stats):
         [],
         sec("GitHub Stats"),
         kv("Repos", str(stats["repos"])),
-        kv("Contributed", str(stats["contributed"])),
         kv("Contributions (1y)", f"{stats['contributions']:,}"),
     ]
 
