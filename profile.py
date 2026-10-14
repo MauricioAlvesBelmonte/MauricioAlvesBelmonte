@@ -1,0 +1,151 @@
+"""Gera dark_mode.svg e light_mode.svg do README de perfil.
+
+Uso: python profile.py
+Lê ACCESS_TOKEN (ou GITHUB_TOKEN) do ambiente para atualizar os stats do GitHub.
+Sem token, ou se a API falhar, mantém os últimos valores salvos em stats.json.
+"""
+import datetime
+import html
+import json
+import os
+import urllib.request
+from pathlib import Path
+
+ROOT = Path(__file__).parent
+USER = "MauricioAlvesBelmonte"
+CAREER_START = datetime.date(2020, 6, 24)
+WIDTH = 58  # largura, em caracteres, de cada linha do card
+
+
+def uptime(start=CAREER_START):
+    t = datetime.date.today()
+    y, m, d = t.year - start.year, t.month - start.month, t.day - start.day
+    if d < 0:
+        m -= 1
+        d += 30
+    if m < 0:
+        y -= 1
+        m += 12
+    return f"{y} anos, {m} meses, {d} dias"
+
+
+def fetch_stats():
+    cache = ROOT / "stats.json"
+    stats = json.loads(cache.read_text()) if cache.exists() else {"repos": 0, "contributed": 0, "contributions": 0}
+    token = os.environ.get("ACCESS_TOKEN") or os.environ.get("GITHUB_TOKEN")
+    if not token:
+        return stats
+    query = """query($login:String!){ user(login:$login){
+      repositories(ownerAffiliations:OWNER){totalCount}
+      repositoriesContributedTo(contributionTypes:[COMMIT,PULL_REQUEST,REPOSITORY]){totalCount}
+      contributionsCollection{contributionCalendar{totalContributions}} } }"""
+    req = urllib.request.Request(
+        "https://api.github.com/graphql",
+        data=json.dumps({"query": query, "variables": {"login": USER}}).encode(),
+        headers={"Authorization": f"bearer {token}", "Content-Type": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            u = json.load(r)["data"]["user"]
+        new = {
+            "repos": u["repositories"]["totalCount"],
+            "contributed": u["repositoriesContributedTo"]["totalCount"],
+            "contributions": u["contributionsCollection"]["contributionCalendar"]["totalContributions"],
+        }
+        # Sem ACCESS_TOKEN, o GITHUB_TOKEN não enxerga os repos privados: não deixa os números regredirem.
+        stats = new if os.environ.get("ACCESS_TOKEN") else {k: max(stats.get(k, 0), v) for k, v in new.items()}
+        cache.write_text(json.dumps(stats, indent=1) + "\n")
+    except Exception as e:
+        print(f"stats: mantendo valores anteriores ({e})")
+    return stats
+
+
+def kv(k, v):
+    dots = WIDTH - len(k) - len(v) - 3
+    return [("key", k), ("cc", ": " + "." * dots + " "), ("value", v)]
+
+
+def sec(t):
+    return [("text", t + " "), ("cc", "-" * (WIDTH - len(t) - 1))]
+
+
+def lines(stats):
+    return [
+        [("text", "mauricio"), ("cc", "@"), ("text", "belmonte "), ("cc", "-" * (WIDTH - 18))],
+        kv("OS", "Fedora Linux 44, Windows 11"),
+        kv("Uptime", uptime()),
+        kv("Host", "SIGE Cloud, BM Menu (cofundador)"),
+        kv("Kernel", "Dev C#/.NET · ERP e integrações"),
+        kv("IDE", "VS Code, Claude Code, OpenCode"),
+        kv("Locale", "Rio Grande do Sul, BR"),
+        [],
+        kv("Languages.Programming", "C#, Python, TypeScript"),
+        kv("Frameworks", "ASP.NET, Angular, React, Svelte, FastAPI"),
+        kv("Databases", "MongoDB, PostgreSQL, SQLite"),
+        kv("DevOps.AI", "Docker, Actions, Claude, Ollama"),
+        kv("Languages.Real", "Português"),
+        [],
+        sec("Contact"),
+        kv("Email", "mauricioabelmonte@gmail.com"),
+        kv("LinkedIn", "mauricioabelmonte-dev"),
+        kv("Web", "mauriciobelmonte.dev.br"),
+        [],
+        sec("GitHub Stats"),
+        kv("Repos", str(stats["repos"])),
+        kv("Contributed", str(stats["contributed"])),
+        kv("Contributions (1y)", f"{stats['contributions']:,}"),
+    ]
+
+
+THEMES = {
+    "dark": dict(bg="#161b22", text="#c9d1d9", key="#ffa657", value="#a5d6ff", cc="#616e7f", border="#30363d", prompt="#3fb950"),
+    "light": dict(bg="#f6f8fa", text="#24292f", key="#953800", value="#0a3069", cc="#8b949e", border="#d0d7de", prompt="#1a7f37"),
+}
+
+
+def svg(theme, logos, info):
+    P = THEMES[theme]
+    lh, fs, cw = 20, 15, 9.0
+    n, step = len(logos), 2.6
+    total, on = n * step, 100 / n
+    out = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" font-family="ConsolasFallback,Consolas,\'DejaVu Sans Mono\',monospace" width="985" height="550" font-size="{fs}px">',
+        f"""<style>
+@font-face{{src:local('Consolas'),local('Consolas Bold');font-family:'ConsolasFallback';font-display:swap;-webkit-size-adjust:109%;size-adjust:109%}}
+.key{{fill:{P['key']}}}.value{{fill:{P['value']}}}.cc{{fill:{P['cc']}}}.text{{fill:{P['text']}}}.pr{{fill:{P['prompt']}}}
+text,tspan{{white-space:pre}}
+.logo{{opacity:0;animation:cyc {total}s infinite}}
+@keyframes cyc{{0%{{opacity:0}}{on * 0.08:.2f}%{{opacity:1}}{on * 0.9:.2f}%{{opacity:1}}{on:.2f}%{{opacity:0}}100%{{opacity:0}}}}
+.cur{{animation:bl 1s steps(1) infinite}}@keyframes bl{{50%{{opacity:0}}}}
+@media (prefers-reduced-motion:reduce){{.logo{{animation:none}}.logo:first-of-type{{opacity:1}}}}
+</style>""",
+        f'<rect width="985" height="550" fill="{P["bg"]}" rx="15"/>',
+    ]
+    lx, ly = 22, 50
+    for i, logo in enumerate(logos):
+        col = logo["color"]
+        out.append(f'<g class="logo" style="animation-delay:{i * step:.1f}s;color:{P["text"]}">')
+        out.append(f'<text x="{lx}" y="{ly}" fill="{col}">' + "".join(
+            f'<tspan x="{lx}" y="{ly + j * lh}">{html.escape(r)}</tspan>' for j, r in enumerate(logo["art"])) + "</text>")
+        out.append(f'<text x="{lx}" y="{ly + 20 * lh + 22}"><tspan class="pr">~/daily</tspan><tspan class="cc"> $ </tspan>'
+                   f'<tspan class="text">using </tspan><tspan fill="{col}">{html.escape(logo["label"])}</tspan></text>')
+        out.append("</g>")
+    ix, iy = 410, 30
+    out.append(f'<text x="{ix}" y="{iy}" class="text">')
+    for j, line in enumerate(info):
+        out.append(f'<tspan x="{ix}" y="{iy + j * lh}">' + "".join(
+            f'<tspan class="{c}">{html.escape(s)}</tspan>' for c, s in line) + "</tspan>")
+    out.append("</text>")
+    fy = iy + len(info) * lh + 28
+    out.append(f'<line x1="{ix}" x2="{ix + WIDTH * cw}" y1="{fy - 20}" y2="{fy - 20}" stroke="{P["border"]}"/>')
+    out.append(f'<text x="{ix}" y="{fy}"><tspan class="pr">❯</tspan><tspan class="text"> git commit -m </tspan>'
+               f'<tspan class="value">"funciona (não sei bem por quê)"</tspan><tspan class="text cur">█</tspan></text>')
+    out.append("</svg>")
+    return "\n".join(out) + "\n"
+
+
+if __name__ == "__main__":
+    logos = json.loads((ROOT / "logos.json").read_text())
+    info = lines(fetch_stats())
+    for theme in THEMES:
+        (ROOT / f"{theme}_mode.svg").write_text(svg(theme, logos, info))
