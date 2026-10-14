@@ -76,7 +76,7 @@ def lines(stats):
         [("text", "mauricio"), ("cc", "@"), ("text", "belmonte "), ("cc", "-" * (WIDTH - 18))],
         kv("OS", "Fedora Linux 44, Windows 11"),
         kv("Uptime", uptime()),
-        kv("Host", "SIGE Cloud, BM Menu (cofundador)"),
+        kv("Host", "SIGE Cloud, BM Menu"),
         kv("Kernel", "Dev C#/.NET · ERP e integrações"),
         kv("IDE", "VS Code, Claude Code, OpenCode"),
         kv("Locale", "Rio Grande do Sul, BR"),
