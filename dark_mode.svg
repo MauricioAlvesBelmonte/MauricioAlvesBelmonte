@@ -57,9 +57,9 @@ text,tspan{white-space:pre}
 <text x="400" y="50" class="text">
 <tspan x="400" y="50"><tspan class="ok">● </tspan><tspan class="text">mauricio.service</tspan><tspan class="cc"> - </tspan><tspan class="value">Dev C#/.NET · ERP e integrações</tspan></tspan>
 <tspan x="400" y="70"><tspan class="key">     Loaded</tspan><tspan class="cc">: </tspan><tspan class="value">loaded (/rs/belmonte.service; </tspan><tspan class="ok">enabled</tspan><tspan class="value">)</tspan></tspan>
-<tspan x="400" y="90"><tspan class="key">     Active</tspan><tspan class="cc">: </tspan><tspan class="ok">active (running)</tspan><tspan class="value"> since 2020-06-24; </tspan><tspan class="cc">6y 4m 1d</tspan></tspan>
+<tspan x="400" y="90"><tspan class="key">     Active</tspan><tspan class="cc">: </tspan><tspan class="ok">active (running)</tspan><tspan class="value"> since 2020-06-24; </tspan><tspan class="cc">6y 4m 2d</tspan></tspan>
 <tspan x="400" y="110"><tspan class="key">       Docs</tspan><tspan class="cc">: </tspan><tspan class="value">https://mauriciobelmonte.dev.br</tspan></tspan>
-<tspan x="400" y="130"><tspan class="key">   Main PID</tspan><tspan class="cc">: </tspan><tspan class="value">1563 </tspan><tspan class="cc">(contributions, 1y)</tspan></tspan>
+<tspan x="400" y="130"><tspan class="key">   Main PID</tspan><tspan class="cc">: </tspan><tspan class="value">1558 </tspan><tspan class="cc">(contributions, 1y)</tspan></tspan>
 <tspan x="400" y="150"><tspan class="key">      Tasks</tspan><tspan class="cc">: </tspan><tspan class="value">9 </tspan><tspan class="cc">(repos)</tspan></tspan>
 <tspan x="400" y="170"><tspan class="key">     Memory</tspan><tspan class="cc">: </tspan><tspan class="value">C#, Python, TypeScript</tspan></tspan>
 <tspan x="400" y="190"><tspan class="key">        CPU</tspan><tspan class="cc">: </tspan><tspan class="value">ASP.NET, Angular, React, Svelte, FastAPI</tspan></tspan>
@@ -67,14 +67,14 @@ text,tspan{white-space:pre}
 <tspan x="400" y="230"><tspan class="cc">             ├─ </tspan><tspan class="value">SIGE Cloud</tspan></tspan>
 <tspan x="400" y="250"><tspan class="cc">             └─ </tspan><tspan class="value">BM Menu</tspan></tspan>
 <tspan x="400" y="270"></tspan>
-<tspan x="400" y="290"><tspan class="cc">out 25 09:02 </tspan><tspan class="key">dev[1563]</tspan><tspan class="cc">: </tspan><tspan class="value">db: MongoDB, PostgreSQL, SQLite</tspan></tspan>
-<tspan x="400" y="310"><tspan class="cc">out 25 09:03 </tspan><tspan class="key">dev[1563]</tspan><tspan class="cc">: </tspan><tspan class="value">ops: Docker, Actions, Claude, Ollama</tspan></tspan>
-<tspan x="400" y="330"><tspan class="cc">out 25 09:03 </tspan><tspan class="key">dev[1563]</tspan><tspan class="cc">: </tspan><tspan class="value">os: Fedora Linux 44, Windows 11</tspan></tspan>
-<tspan x="400" y="350"><tspan class="cc">out 25 09:04 </tspan><tspan class="key">dev[1563]</tspan><tspan class="cc">: </tspan><tspan class="value">ide: VS Code, Claude Code, OpenCode</tspan></tspan>
-<tspan x="400" y="370"><tspan class="cc">out 25 09:04 </tspan><tspan class="key">dev[1563]</tspan><tspan class="cc">: </tspan><tspan class="value">locale: Rio Grande do Sul, BR</tspan></tspan>
-<tspan x="400" y="390"><tspan class="cc">out 25 09:05 </tspan><tspan class="key">dev[1563]</tspan><tspan class="cc">: </tspan><tspan class="value">mail: mauricioabelmonte@gmail.com</tspan></tspan>
-<tspan x="400" y="410"><tspan class="cc">out 25 09:05 </tspan><tspan class="key">dev[1563]</tspan><tspan class="cc">: </tspan><tspan class="value">linkedin: in/mauricioabelmonte-dev</tspan></tspan>
-<tspan x="400" y="430"><tspan class="cc">out 25 18:47 </tspan><tspan class="key">dev[1563]</tspan><tspan class="cc">: </tspan><tspan class="warn">warn: funciona (não sei bem por quê)</tspan></tspan>
+<tspan x="400" y="290"><tspan class="cc">out 26 09:02 </tspan><tspan class="key">dev[1558]</tspan><tspan class="cc">: </tspan><tspan class="value">db: MongoDB, PostgreSQL, SQLite</tspan></tspan>
+<tspan x="400" y="310"><tspan class="cc">out 26 09:03 </tspan><tspan class="key">dev[1558]</tspan><tspan class="cc">: </tspan><tspan class="value">ops: Docker, Actions, Claude, Ollama</tspan></tspan>
+<tspan x="400" y="330"><tspan class="cc">out 26 09:03 </tspan><tspan class="key">dev[1558]</tspan><tspan class="cc">: </tspan><tspan class="value">os: Fedora Linux 44, Windows 11</tspan></tspan>
+<tspan x="400" y="350"><tspan class="cc">out 26 09:04 </tspan><tspan class="key">dev[1558]</tspan><tspan class="cc">: </tspan><tspan class="value">ide: VS Code, Claude Code, OpenCode</tspan></tspan>
+<tspan x="400" y="370"><tspan class="cc">out 26 09:04 </tspan><tspan class="key">dev[1558]</tspan><tspan class="cc">: </tspan><tspan class="value">locale: Rio Grande do Sul, BR</tspan></tspan>
+<tspan x="400" y="390"><tspan class="cc">out 26 09:05 </tspan><tspan class="key">dev[1558]</tspan><tspan class="cc">: </tspan><tspan class="value">mail: mauricioabelmonte@gmail.com</tspan></tspan>
+<tspan x="400" y="410"><tspan class="cc">out 26 09:05 </tspan><tspan class="key">dev[1558]</tspan><tspan class="cc">: </tspan><tspan class="value">linkedin: in/mauricioabelmonte-dev</tspan></tspan>
+<tspan x="400" y="430"><tspan class="cc">out 26 18:47 </tspan><tspan class="key">dev[1558]</tspan><tspan class="cc">: </tspan><tspan class="warn">warn: funciona (não sei bem por quê)</tspan></tspan>
 </text>
 <line x1="400" x2="940.0" y1="452" y2="452" stroke="#2b2b2b"/>
 <text x="400" y="472"><tspan class="pr">❯</tspan><tspan class="text"> </tspan><tspan class="text cur">█</tspan></text>
